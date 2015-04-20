@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Solution {
 
 	static int intInput;
-	static long ANSWER;
+	static long ANSWER=0;
 	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
@@ -14,12 +14,15 @@ public class Solution {
 
 		for (int i=0; i<intInput; i++) {
 			String nextLineInput = sc.nextLine();
-			if (Integer.parseInt(nextLineInput) %2 == 0) {
-				ANSWER = (long) Math.pow((double)Integer.valueOf(nextLineInput)/2, 2);
-			}else{
-				ANSWER = (long) (Math.ceil((double)Integer.valueOf(nextLineInput)/2) * Math.floor((double)Integer.valueOf(nextLineInput)/2));
+			for (int j=0; j<nextLineInput.length(); j++) {
+				if (nextLineInput.charAt(j) != '0') {
+					if (Integer.parseInt(nextLineInput) % Character.getNumericValue(nextLineInput.codePointAt(j)) == 0) {
+						ANSWER++;
+					}
+				}
 			}
 			System.out.println(ANSWER);
+			ANSWER=0;
 		}
 	}
 }
