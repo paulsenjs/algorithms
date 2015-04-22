@@ -6,7 +6,7 @@ class Algorithm {
 	static int intInput;
 	static double firstDevide;
 	static double secondDevide;
-	static int total; 
+	static int total;
 	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
