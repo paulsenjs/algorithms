@@ -1,7 +1,5 @@
 package coby.thronenumbers;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.Scanner;
 
 class Algorithm {
@@ -14,7 +12,6 @@ class Algorithm {
 	
 	public static void main(String args[]) throws Exception	{
 		Scanner sc = new Scanner(System.in);
-
 		mainLoop = sc.nextInt();
 //		long startTime = System.currentTimeMillis();
 		
