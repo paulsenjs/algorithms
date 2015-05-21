@@ -3,138 +3,64 @@ package coby.charactermining;
 import java.util.Scanner;
 
 class Algorithm {
-	static int Answer;
-	static String strNextLine;
-	static int w, x, y;
-	static char[][] map;
-	static String[] matchMap;
-	static String[] singleMap;
-	static char[] singleMatch;
-	
+	static int Answer1, Answer2;
+	static int a, b, c;
+	static int[][][] stack;
+	static int[] x;
+	static int[] y;
+	static int[] z;
 	
 	public static void main(String args[]) throws Exception	{
 		Scanner sc = new Scanner(System.in);
 
 		int T = sc.nextInt();
-		
-		y = sc.nextInt();
-		x = sc.nextInt();
-		
 		for(int test_case = 0; test_case < T; test_case++) {
+			int var = sc.nextInt();
+			stack = new int[var][var][var];
 			
-			map = new char[y][x];
-			singleMap = new String[y];
+			x = new int[var];
+			y = new int[var];
+			z = new int[var];
 			
-			for (int i=0; i<y; i++) {
-				String strNextLine = sc.next();
-				for (int j=0; j<x; j++) {
-					char c = strNextLine.charAt(j);
-					map[i][j] = c;
-				}
-			}
+			for (int j=0; j<var; j++) {
+				int a = sc.nextInt();
+				int b = sc.nextInt();
 
-			System.out.println(map);
-			
-			w = sc.nextInt();
-			matchMap = new String[w];
-			
-			for (int k=0; k<w; k++) {
-				matchMap[k] = sc.next();
-			}
-			
-			System.out.println(matchMap);
-			
-			int p = 0, q = 0;
-			for (int l=0; l<w; l++) {
-				int length = matchMap[l].length();
-				singleMatch = new char[length];
-				for (int m=0; m<length; m++) {
-					singleMatch[m] = matchMap[l].charAt(m);
-					for (int n=0; n<y; n++) {
-						for (int o=0; o<x; o++) {
-							if (q >= w){
-								p++;
-								q=0;
-							}
-							if (map[n][o] == singleMatch[m]) {
-								System.out.println((n+1) +" - "+(o+1));
-								if (q<w){
-									q++;								
-								}
-							}
-						}
-					}
-					
+				if (a == 0) {
+					y[j] = a;
+					x[j] = b;
+				}else if (b == 0) {
+					y[j] = a;
+					z[j] = b;
+				}else {
+					//check the last position of the similar value;
+					//you can exactly sure whether it's son or parent or brother.
 				}
 			}
-			
-			/*singleMatch = new char[w][matchMap[0].length()];
-			for (int l=0; l<w; l++) {
-				for (int m=0; m<matchMap[l].length(); m++){
-					singleMatch[l][m] = matchMap[l].charAt(m);
-				}
-			}
-			
-			int p = 0, q = 0;
-			for (int n=0; n<y; n++) {
-				for (int o=0; o<x; o++) {
-					if (q >= w){
-						p++;
-						q=0;
-					}
-					if (map[n][o] == singleMatch[p][q]) {
-						System.out.println((n+1) +" - "+(o+1));
-						if (q<w){
-							q++;								
-						}
-					}
-				}
-			}*/	
-			
-			System.out.println("Case #"+(test_case+1));
-			System.out.println(Answer);
-			Answer = 0;
 		}
 	}
 }
 
 
-/*2
-5 4
-qwer
-asdf
-zxcv
-yuio
-hjkl
-3
-zxc
-yui
-zuk
-
-10 11
-abcdefghijW
-lmnopqrstHv
-wxyzabcdifg
-hKjklmnTpqr
-stCvwxezabc
-qweAtyqwert
-qwerLyqwert
-qwertBqwert
-qwertyqwert
-qwertyqwert
+/*Input
 2
-black
-white
+5
+1 0
+4 0
+0 2
+3 2
+5 3
+1
+0 1
 
-
+Output
 Case #1 :
-
-3 1
-4 1
-3 1
-
+Eldest     : 2
+SameGen    : 3
+Younglings : 1 4 5
 Case #2 :
-
-8 6
-1 11
+Eldest     : 1
+SameGen    : none
+Younglings : none
 */
+	
