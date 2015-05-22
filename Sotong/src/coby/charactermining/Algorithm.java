@@ -1,43 +1,75 @@
 package coby.charactermining;
 
 import java.util.Scanner;
+import java.util.Stack;
 
 class Algorithm {
-	static int Answer1, Answer2;
-	static int a, b, c;
-	static int[][][] stack;
-	static int[] x;
-	static int[] y;
-	static int[] z;
+	static Stack<Integer> stX;
+	static Stack<Integer> stY;
+	static Stack<Integer> stZ;
 	
 	public static void main(String args[]) throws Exception	{
 		Scanner sc = new Scanner(System.in);
 
 		int T = sc.nextInt();
+		
 		for(int test_case = 0; test_case < T; test_case++) {
 			int var = sc.nextInt();
-			stack = new int[var][var][var];
-			
-			x = new int[var];
-			y = new int[var];
-			z = new int[var];
+			stX = new Stack<>();
+			stY = new Stack<>();
+			stZ = new Stack<>();
 			
 			for (int j=0; j<var; j++) {
-				int a = sc.nextInt();
-				int b = sc.nextInt();
-
-				if (a == 0) {
-					y[j] = a;
-					x[j] = b;
-				}else if (b == 0) {
-					y[j] = a;
-					z[j] = b;
+				int child = sc.nextInt();
+				int parent = sc.nextInt();
+				
+				if (stX.isEmpty() && stY.isEmpty()) {
+					stX.push(parent);
+					stY.push(child);
 				}else {
-					//check the last position of the similar value;
-					//you can exactly sure whether it's son or parent or brother.
+					if (child == stY.peek()) {
+						if (parent != stX.peek()){
+							stX.push(child);
+						}
+					} else if (child != stY.peek()) {
+						if (parent == stX.peek()) {
+							stY.push(child);
+						}else if (parent == stY.peek()) {
+							stY.pop();
+							stY.push(parent);
+							stZ.push(child);
+						}else if (child == stX.peek()){
+							stX.pop();
+							stX.push(parent);
+							stZ.addAll(stY);
+							stY.clear();
+							stY.push(child);
+						}
+					}
 				}
 			}
+			
+			System.out.println("Case"+(test_case+1)+"# :");
+			System.out.println("Eldest "+print(stX));
+			System.out.println("SameGen "+print(stY));
+			System.out.println("Younglings "+print(stZ));
 		}
+	}
+	
+	private static String print(Stack<Integer> st){
+		StringBuilder str = new StringBuilder();
+		if (st.size() == 0) {
+			str.append("none");
+		}else if ((st.size() == 1) && (st.get(0) == 0)) {
+			str.append("none");
+		}else {
+			for (int i=0; i<st.size(); i++) {
+				if (st.get(i) != 0){
+					str.append(st.get(i)+" ");
+				}
+			}			
+		}
+		return ": "+str.toString();
 	}
 }
 
