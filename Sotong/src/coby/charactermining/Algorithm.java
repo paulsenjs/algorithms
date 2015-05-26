@@ -50,9 +50,9 @@ class Algorithm {
 			}
 			
 			System.out.println("Case"+(test_case+1)+"# :");
-			System.out.println("Eldest "+print(stX));
-			System.out.println("SameGen "+print(stY));
-			System.out.println("Younglings "+print(stZ));
+			System.out.println("Eldest 		"+print(stX));
+			System.out.println("SameGen 	"+print(stY));
+			System.out.println("Younglings 	"+print(stZ));
 		}
 	}
 	
